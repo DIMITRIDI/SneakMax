@@ -10,7 +10,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "asd", sans-serif;
+  font-family: "Intro", sans-serif;
   background-color: var(--color-white);
 }
 
@@ -55,7 +55,8 @@ a {
 
 .btn-reset {
   border: none;
-  padding: 0;
+  padding: 20px 0;
+  width: 240px;
   background: transparent;
   cursor: pointer;
 }
@@ -77,7 +78,7 @@ a {
 }
 
 .btn {
-	padding: 22px 47px;
+	padding: 22px 0;
 	border-radius: 4px;
 	font: var(--middle-regular);
 	transition: color .3s ease-in-out, background-color .3s ease-in-out;
@@ -88,6 +89,15 @@ a {
 
 		&:hover {
 			background-color: var(--color-accent-hover);
+		}
+	}
+
+	&--secondary {
+		color: var(--color-white);
+		background-color: var(--color-main);
+
+		&:hover {
+			background-color: var(--color-main-hover);
 		}
 	}
 }
