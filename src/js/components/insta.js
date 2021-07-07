@@ -12,7 +12,6 @@ const insta = document.querySelector('.instagram__content');
 				const newArray = instaArray.slice(0, 5);
 
 				for (let item of newArray) {
-					console.log(item.node);
 					let element = item.node;
 					insta.insertAdjacentHTML('afterbegin', `
 						<article class="instagram__item">
