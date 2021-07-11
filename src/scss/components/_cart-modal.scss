@@ -64,7 +64,15 @@
 		margin-bottom: var(--second-offset);
 	}
 
-	&__item {
+	&__list {
+		display: none;
+
+		&--visible {
+			display: block;
+		}
+	}
+
+	.mini-cart__item {
 		&:not(:last-child) {
 			margin-bottom: 14px;
 		}
@@ -74,6 +82,7 @@
 		display: flex;
 		align-items: center;
 		color: var(--color-main);
+		padding: var(--second-offset) 0;
 
 		svg {
 			margin-left: 5px;
@@ -81,6 +90,13 @@
 			height: 7px;
 			fill: currentColor;
 			object-fit: cover;
+			transition: transform .3s ease-in-out;
+		}
+
+		&--active {
+			svg {
+				transform: rotate(180deg);
+			}
 		}
 	}
 }

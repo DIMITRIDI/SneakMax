@@ -352,6 +352,7 @@ const cartLogic = () => {
 	});
 };
 
+// перенос данных из корзины в мини-корзину
 const openOrderModal = document.querySelector('.mini-cart__btn');
 const orderModalList = document.querySelector('.cart-modal-order__list');
 const orderModalQuantity = document.querySelector('.cart-modal-order__quantity span');
@@ -377,7 +378,7 @@ orderModalShow.addEventListener('click', () => {
 	}
 });
 
-// ДОДЕЛАТЬ УДАЛЕНИЕ ИЗ МОДАЛКИ
+// УДАЛЕНИЕ ИЗ МИНИ_КОРЗИНы
 orderModalList.addEventListener('click', (e) => {
 	if (e.target.classList.contains('mini-product__delete')) {
 		console.log('asd');
