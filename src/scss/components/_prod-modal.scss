@@ -1,3 +1,11 @@
+@import "../mixins";
+
+.modal::before {
+	@include tablet {
+		display: none;
+	}
+}
+
 .prod-modal {
 	width: 1140px;
 	border-radius: 4px;
@@ -5,12 +13,21 @@
 
 	.modal__close {
 		display: none;
+
+		@include small-tablet {
+			display: block;
+			z-index: 5;
+		}
 	}
 
 	&__top {
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: var(--main-offset);
+
+		@include small-tablet {
+			flex-direction: column;
+		}
 	}
 
 	&__bottom {
@@ -28,6 +45,11 @@
 			height: 100%;
 			object-fit: cover;
 		}
+	}
+
+	@include tablet {
+		margin: 0;
+		width: 100%;
 	}
 }
 
@@ -47,6 +69,12 @@
 			object-fit: cover;
 		}
 	}
+
+	@include small-tablet {
+		margin-right: 0;
+		margin-bottom: 30px;
+		width: 100%;
+	}
 }
 
 .modal-info {
@@ -63,10 +91,23 @@
 		font: var(--middle-book);
 		line-height: 16px;
 		color: var(--color-grey);
+
+		@include mobile {
+			flex-direction: column;
+		}
 	}
 
 	&__vendor {
 		margin-right: var(--main-offset);
+
+		@include tablet {
+			margin-right: 10px;
+		}
+
+		@include mobile {
+			margin-right: 0;
+			margin-bottom: 10px;
+		}
 	}
 
 	&__quantity {
@@ -115,6 +156,15 @@
 
 	&__order {
 		margin-top: auto;
+		width: 100%;
+
+		@include small-tablet {
+			margin-top: 30px;
+		}
+	}
+
+	@include small-tablet {
+		margin: 0;
 		width: 100%;
 	}
 }
@@ -202,6 +252,15 @@
 		&:first-child {
 			margin-right: var(--second-offset);
 		}
+
+		@include small-tablet {
+			width: 100%;
+
+			&:first-child {
+				margin-right: 0;
+				margin-bottom: 30px;
+			}
+		}
 	}
 
 	&__title {
@@ -216,5 +275,9 @@
 		max-width: 450px;
 		font: var(--middle-book);
 		color: var(--color-main);
+	}
+
+	@include small-tablet {
+		display: block;
 	}
 }

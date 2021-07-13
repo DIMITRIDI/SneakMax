@@ -1,3 +1,5 @@
+@import "../mixins";
+
 .quiz {
 	padding: var(--big-offset) 0;
 
@@ -5,6 +7,10 @@
 		border-radius: 4px;
 		padding: var(--main-offset) 100px;
 		background-color: var(--color-bg);
+
+		@include small-tablet {
+			padding: var(--main-offset);
+		}
 	}
 
 	&__title {
@@ -34,6 +40,10 @@
 
 	&__lable {
 		display: inline-block;
+
+		@include mobile {
+			width: 100%;
+		}
 	}
 
 	&__message {
@@ -45,6 +55,10 @@
 		color: var(--color-cameo);
 		background-color: var(--color-white);
 		padding: var(--second-offset);
+
+		@include mobile {
+			width: 100%;
+		}
 	}
 
 	&__answers {
@@ -53,11 +67,25 @@
 		grid-template-columns: repeat(3, 1fr);
 		gap: var(--second-offset) 70px;
 		padding-bottom: var(--main-offset);
+
+		@include small-tablet {
+			gap: var(--second-offset);
+		}
+
+		@include mobile {
+			display: block;
+		}
 	}
 
 	&__item {
 		img {
 			margin-bottom: var(--small-offset);
+		}
+
+		@include mobile {
+			&:not(:last-child) {
+				margin-bottom: 30px;
+			}
 		}
 	}
 
@@ -91,6 +119,10 @@
 		position: absolute;
 		top: -5px;
 		right: -185px;
+
+		@include small-tablet {
+			display: none;
+		}
 	}
 
 	&__title {
@@ -100,6 +132,11 @@
 		font-size: 36px;
 		line-height: 140%;
 		color: var(--color-white);
+
+		@include mobile {
+			font-size: 24px;
+			line-height: 30px;
+		}
 	}
 
 	&__descr {
@@ -118,9 +155,18 @@
 		&:nth-of-type(2) {
 			margin-bottom: var(--second-offset);
 		}
+
+		@include mobile {
+			max-width: none;
+		}
 	}
 
 	&__btn {
 		max-width: 220px;
+
+		@include mobile {
+			width: 100%;
+			min-width: auto;
+		}
 	}
 }

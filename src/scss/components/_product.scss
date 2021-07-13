@@ -1,3 +1,5 @@
+@import "../mixins";
+
 .product {
 	overflow: hidden;
 	border-radius: 4px;
@@ -13,8 +15,12 @@
 		height: 100%;
 		background: rgba(255, 255, 255, .6);
 		opacity: 0;
-		visibility: hidden;
+		// visibility: hidden;
 		transition: opacity .3s ease-in-out, visibility .3s ease-in-out;
+
+		@include mobile {
+			opacity: 1;
+		}
 	}
 
 	&__image {
@@ -43,7 +49,14 @@
 		color: var(--color-main);
 	}
 
+	&__btns {
+		&--active {
+			opacity: 1;
+		}
+	}
+
 	&__btn {
+		outline: none;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -57,14 +70,25 @@
 			width: 30px;
 			height: 30px;
 			object-fit: cover;
+			fill: var(--color-white);
+		}
+
+		&:focus {
+			background-color: var(--color-main-hover);
+		}
+
+		@include desktop {
+			&:hover {
+				background-color: var(--color-main-hover);
+			}
+		}
+
+		&:active {
+			background-color: var(--color-accent-hover);
 		}
 
 		&:first-child {
 			margin-right: var(--main-offset);
-		}
-
-		&:hover {
-			background-color: var(--color-main-hover);
 		}
 
 		&--disabled {
@@ -73,10 +97,12 @@
 		}
 	}
 
-	&:hover {
-		.product__btns {
-			opacity: 1;
-			visibility: visible;
+	@include desktop {
+		&:hover {
+			.product__btns {
+				opacity: 1;
+				visibility: visible;
+			}
 		}
 	}
 }
@@ -97,6 +123,11 @@
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
+		}
+
+		@include mobile {
+			width: 60px;
+			height: 60px;
 		}
 	}
 
@@ -125,6 +156,7 @@
 	}
 
 	&__delete {
+		flex-shrink: 0;
 		width: 20px;
 		height: 20px;
 		font-size: 0;
@@ -195,6 +227,10 @@
 			svg {
 				display: none;
 			}
+		}
+
+		@include mobile {
+			display: block;
 		}
 	}
 }
