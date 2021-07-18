@@ -1,3 +1,6 @@
+let quizFormData = null;
+let textareaText = null;
+
 const quizData = [{
 	number: 1,
 	title: "Какой тип кроссовок рассматриваете?",
@@ -147,23 +150,52 @@ nextQuestion() {
 			document.querySelector('.quiz-questions').style.display = 'none';
 			document.querySelector('.last-question').style.display = 'block';
 			document.querySelector('.quiz__title').textContent = 'Ваша подборка готова!';
-			document.querySelector('.quiz__descr').textContent = 'Оставьте свои контактные данные, чтобы бы мы могли отправить  подготовленный для вас каталог';
+			document.querySelector('.quiz__descr').textContent = 'Оставьте свои контактные данные, чтобы бы мы могли отправить подготовленный для вас каталог';
+
+			document.querySelector('.quiz-form').addEventListener('submit', (e) => {
+				e.preventDefault();
+
+				quizFormData = new FormData();
+
+				for (let item of this.resultArray) {
+					for (let obj in item) {
+						quizFormData.append(obj, item[obj].substring(0, item[obj].length - 1));
+					}
+				}
+
+				quizFormData.append('textarea', textareaText);
+
+				let xhr = new XMLHttpRequest();
+	
+				xhr.onreadystatechange = function() {
+					if (xhr.readyState === 4) {
+						if (xhr.status === 200) {
+							console.log('Отправлено');
+						}
+					}
+				};
+	
+				document.querySelector('.quiz-form').querySelectorAll('input').forEach(el => {
+					if (el.value) {
+						xhr.open('POST', 'mail.php', true);
+						xhr.send(quizFormData);
+			
+						document.querySelector('.quiz-form').reset();
+					}
+				});
+			});
 		}
 	} else {
-		console.log('Не валидно!')
+		console.log('Не валидно!');
 	}
 }
 
 events() {
-	console.log('events!')
+	console.log('events!');
 	this.$el.addEventListener('click', (e) => {
 		if (e.target == document.querySelector('[data-next-btn]')) {
 			this.addToSend();
 			this.nextQuestion();
-		}
-
-		if (e.target == document.querySelector('[data-send]')) {
-			this.send();
 		}
 	});
 
@@ -176,7 +208,10 @@ events() {
 					el.checked = false;
 				});
 			}
-			this.tmp = this.serialize(this.$el);
+			this.tmp = this.serialize(document.querySelector('.quiz-form'));
+		} else {
+			let textarea = this.$el.querySelector('textarea');
+			textareaText = textarea.value;
 		}
 	});
 }
@@ -224,23 +259,6 @@ valid() {
 
 addToSend() {
 	this.resultArray.push(this.tmp)
-}
-
-send() {
-	if (this.valid()) {
-		const formData = new FormData();
-
-		for (let item of this.resultArray) {
-			for (let obj in item) {
-				formData.append(obj, item[obj].substring(0, item[obj].length - 1));
-			}
-		}
-
-		const response = fetch("mail.php", {
-			method: 'POST',
-			body: formData
-		});
-	}
 }
 
 serialize(form) {
